@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+    'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Custom styling for selects to match design */
+.MuiSelect-select {
+  background-color: white !important;
+  font-size: 14px !important;
+}
+
+.MuiMenuItem-root {
+  font-size: 14px !important;
+}
+
+/* Ensure left panel matches the image */
+.left-panel .MuiTypography-subtitle1 {
+  font-size: 14px !important;
+  margin-bottom: 6px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.left-panel .MuiSelect-select {
+  padding: 8px 12px !important;
+}
+
+/* Right panel styling to match the image */
+.right-panel .MuiTypography-subtitle1 {
+  font-size: 14px !important;
+  margin-bottom: 6px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.right-panel .MuiSlider-root {
+  margin: 0;
+}
+
+.right-panel .MuiSlider-rail {
+  background-color: #000 !important;
+}
+
+.right-panel .MuiSlider-track {
+  background-color: #ff0000 !important;
+}
+
+/* Ensure panels remain visible and properly positioned */
+.left-panel, .right-panel {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.left-panel::-webkit-scrollbar,
+.right-panel::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  html, body {
+    overflow: auto;
+  }
+  
+  #root {
+    height: auto;
+    min-height: 100%;
+  }
+  
+  .left-panel, .right-panel {
+    max-height: none;
+    margin-bottom: 15px;
+    width: 90% !important;
+  }
+}
