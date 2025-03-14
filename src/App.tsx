@@ -66,12 +66,12 @@ const OverlayPanel = styled(Paper)(({ theme }: any) => ({
     maxHeight: 'none',
     '&.left-panel': {
       left: 'auto',
-      order: 1,
+      order: 0,
       padding: 0
     },
     '&.right-panel': {
       right: 'auto',
-      order: 0,
+      order: 1,
       marginBottom: '20px'
     }
   }
@@ -123,7 +123,8 @@ const CopyrightBar = styled(Box)(({ theme }: any) => ({
   // Media query for mobile
   [theme.breakpoints.down('sm')]: {
     position: 'relative',
-    marginTop: '20px'
+    marginTop: '20px',
+    order: 2
   }
 }));
 
@@ -134,21 +135,18 @@ const MobileContainer = styled(Box)(({ theme }: any) => ({
   width: '100%',
   minHeight: '100vh',
   padding: '20px 0',
-  overflow: 'auto'
+  overflow: 'auto',
+  position: 'relative'
 }));
 
 // Updated logo to match the image exactly
 const Logo = styled('div')({
   display: 'flex',
   alignItems: 'center',
-  '& .logo-icon': {
-    height: '35px',
-    marginRight: '10px',
-  },
-  '& .logo-text': {
-    fontSize: '20px',
-    fontWeight: 'bold',
-    color: '#000'
+  '& .logo-img': {
+    height: '45px',
+    width: 'auto',
+    maxWidth: '100%'
   }
 });
 
@@ -199,13 +197,7 @@ function App() {
           {/* Top Logo Bar (Mobile) */}
           <LogoContainer sx={{ width: '100%', justifyContent: 'center' }}>
             <Logo>
-              <svg className="logo-icon" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="20" cy="20" r="18" fill="#e30613"/>
-                <path d="M20 10 L30 20 L20 30 L10 20 Z" fill="#e30613" stroke="white" strokeWidth="2"/>
-                <circle cx="20" cy="20" r="5" fill="white"/>
-                <path d="M30 10 L35 15" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-              </svg>
-              <span className="logo-text">Logoipsum</span>
+              <img src="/images/schott-logo.png" alt="Schott Performance Wheels" className="logo-img" />
             </Logo>
           </LogoContainer>
 
@@ -213,123 +205,125 @@ function App() {
             <Typography variant="h6">TITLE BAR</Typography>
           </TitleBar>
 
-          {/* Right Panel (Mobile) - Updated to match the reference image */}
-          <OverlayPanel className="right-panel" elevation={3}>
-            <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', fontSize: '24px', mt: 0.5 }}>Options</Typography>
-            
-            <Typography variant="subtitle1">Info</Typography>
-            <FormControl fullWidth variant="outlined" size="small">
-              <Select value={options} onChange={handleOptionsChange} displayEmpty>
-                <MenuItem value=""><em>Choose an option</em></MenuItem>
-                <MenuItem value="1">Option 1</MenuItem>
-                <MenuItem value="2">Option 2</MenuItem>
-              </Select>
-            </FormControl>
+          <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', flex: 1 }}>
+            {/* Left Panel (Mobile) - Updated to match the image styling */}
+            <OverlayPanel className="left-panel" elevation={3}>
+              <InfoSectionContainer>
+                <Typography variant="subtitle1">Info</Typography>
+                <FormControl fullWidth variant="outlined" size="small">
+                  <Select value={info1} onChange={handleInfoChange(setInfo1)} displayEmpty>
+                    <MenuItem value=""><em>Choose an option</em></MenuItem>
+                    <MenuItem value="1">Option 1</MenuItem>
+                    <MenuItem value="2">Option 2</MenuItem>
+                  </Select>
+                </FormControl>
+              </InfoSectionContainer>
 
-            <Typography variant="subtitle1" sx={{ mt: 1.5 }}>Info</Typography>
-            
-            {/* Slider section with background matching the image */}
-            <SliderSection>
-              <Typography variant="h3" sx={{ textAlign: 'center', fontWeight: 'bold', fontSize: '36px' }}>
-                {sliderValue}
-              </Typography>
-              <Slider
-                value={sliderValue}
-                onChange={handleSliderChange}
-                min={1}
-                max={10}
-                step={1}
-                sx={{
-                  color: '#ff0000',
-                  height: 8,
-                  padding: '10px 0',
-                  '& .MuiSlider-thumb': {
-                    width: 20,
-                    height: 20,
-                    backgroundColor: '#fff',
-                    border: '2px solid #000',
-                    '&:focus, &:hover, &.Mui-active': {
-                      boxShadow: '0 0 0 8px rgba(0, 0, 0, 0.1)',
+              <InfoSectionContainer>
+                <Typography variant="subtitle1">Info</Typography>
+                <FormControl fullWidth variant="outlined" size="small">
+                  <Select value={info2} onChange={handleInfoChange(setInfo2)} displayEmpty>
+                    <MenuItem value=""><em>Choose an option</em></MenuItem>
+                    <MenuItem value="1">Option 1</MenuItem>
+                    <MenuItem value="2">Option 2</MenuItem>
+                  </Select>
+                </FormControl>
+              </InfoSectionContainer>
+
+              <InfoSectionContainer>
+                <Typography variant="subtitle1">Info</Typography>
+                <FormControl fullWidth variant="outlined" size="small">
+                  <Select value={info3} onChange={handleInfoChange(setInfo3)} displayEmpty>
+                    <MenuItem value=""><em>Choose an option</em></MenuItem>
+                    <MenuItem value="1">Option 1</MenuItem>
+                    <MenuItem value="2">Option 2</MenuItem>
+                  </Select>
+                </FormControl>
+              </InfoSectionContainer>
+
+              <InfoSectionContainer>
+                <Typography variant="subtitle1">Info</Typography>
+                <FormControl fullWidth variant="outlined" size="small">
+                  <Select value={info4} onChange={handleInfoChange(setInfo4)} displayEmpty>
+                    <MenuItem value=""><em>Choose an option</em></MenuItem>
+                    <MenuItem value="1">Option 1</MenuItem>
+                    <MenuItem value="2">Option 2</MenuItem>
+                  </Select>
+                </FormControl>
+              </InfoSectionContainer>
+            </OverlayPanel>
+
+            {/* Right Panel (Mobile) - Updated to match the reference image */}
+            <OverlayPanel className="right-panel" elevation={3}>
+              <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', fontSize: '24px', mt: 0.5 }}>Options</Typography>
+              
+              <Typography variant="subtitle1">Info</Typography>
+              <FormControl fullWidth variant="outlined" size="small">
+                <Select value={options} onChange={handleOptionsChange} displayEmpty>
+                  <MenuItem value=""><em>Choose an option</em></MenuItem>
+                  <MenuItem value="1">Option 1</MenuItem>
+                  <MenuItem value="2">Option 2</MenuItem>
+                </Select>
+              </FormControl>
+
+              <Typography variant="subtitle1" sx={{ mt: 1.5 }}>Info</Typography>
+              
+              {/* Slider section with background matching the image */}
+              <SliderSection>
+                <Typography variant="h3" sx={{ textAlign: 'center', fontWeight: 'bold', fontSize: '36px' }}>
+                  {sliderValue}
+                </Typography>
+                <Slider
+                  value={sliderValue}
+                  onChange={handleSliderChange}
+                  min={1}
+                  max={10}
+                  step={1}
+                  sx={{
+                    color: '#ff0000',
+                    height: 8,
+                    padding: '10px 0',
+                    '& .MuiSlider-thumb': {
+                      width: 20,
+                      height: 20,
+                      backgroundColor: '#fff',
+                      border: '2px solid #000',
+                      '&:focus, &:hover, &.Mui-active': {
+                        boxShadow: '0 0 0 8px rgba(0, 0, 0, 0.1)',
+                      }
+                    },
+                    '& .MuiSlider-track': {
+                      backgroundColor: '#ff0000',
+                      height: 8,
+                      border: 'none',
+                    },
+                    '& .MuiSlider-rail': {
+                      backgroundColor: '#000',
+                      height: 8,
+                      opacity: 1,
                     }
-                  },
-                  '& .MuiSlider-track': {
-                    backgroundColor: '#ff0000',
-                    height: 8,
-                    border: 'none',
-                  },
-                  '& .MuiSlider-rail': {
-                    backgroundColor: '#000',
-                    height: 8,
-                    opacity: 1,
-                  }
-                }}
-              />
-              <Box sx={{ 
-                display: 'flex', 
-                justifyContent: 'space-between', 
-                mt: 1,
-              }}>
-                <Typography variant="body2" sx={{ fontSize: '14px' }}>value1 info</Typography>
-                <Typography variant="body2" sx={{ fontSize: '14px' }}>value 2 info</Typography>
-              </Box>
-            </SliderSection>
+                  }}
+                />
+                <Box sx={{ 
+                  display: 'flex', 
+                  justifyContent: 'space-between', 
+                  mt: 1,
+                }}>
+                  <Typography variant="body2" sx={{ fontSize: '14px' }}>value1 info</Typography>
+                  <Typography variant="body2" sx={{ fontSize: '14px' }}>value 2 info</Typography>
+                </Box>
+              </SliderSection>
 
-            <Typography variant="subtitle1">Info</Typography>
-            <FormControl fullWidth variant="outlined" size="small">
-              <Select value={options} onChange={handleOptionsChange} displayEmpty>
-                <MenuItem value=""><em>Choose an option</em></MenuItem>
-                <MenuItem value="1">Option 1</MenuItem>
-                <MenuItem value="2">Option 2</MenuItem>
-              </Select>
-            </FormControl>
-          </OverlayPanel>
-
-          {/* Left Panel (Mobile) - Updated to match the image styling */}
-          <OverlayPanel className="left-panel" elevation={3}>
-            <InfoSectionContainer>
               <Typography variant="subtitle1">Info</Typography>
               <FormControl fullWidth variant="outlined" size="small">
-                <Select value={info1} onChange={handleInfoChange(setInfo1)} displayEmpty>
+                <Select value={options} onChange={handleOptionsChange} displayEmpty>
                   <MenuItem value=""><em>Choose an option</em></MenuItem>
                   <MenuItem value="1">Option 1</MenuItem>
                   <MenuItem value="2">Option 2</MenuItem>
                 </Select>
               </FormControl>
-            </InfoSectionContainer>
-
-            <InfoSectionContainer>
-              <Typography variant="subtitle1">Info</Typography>
-              <FormControl fullWidth variant="outlined" size="small">
-                <Select value={info2} onChange={handleInfoChange(setInfo2)} displayEmpty>
-                  <MenuItem value=""><em>Choose an option</em></MenuItem>
-                  <MenuItem value="1">Option 1</MenuItem>
-                  <MenuItem value="2">Option 2</MenuItem>
-                </Select>
-              </FormControl>
-            </InfoSectionContainer>
-
-            <InfoSectionContainer>
-              <Typography variant="subtitle1">Info</Typography>
-              <FormControl fullWidth variant="outlined" size="small">
-                <Select value={info3} onChange={handleInfoChange(setInfo3)} displayEmpty>
-                  <MenuItem value=""><em>Choose an option</em></MenuItem>
-                  <MenuItem value="1">Option 1</MenuItem>
-                  <MenuItem value="2">Option 2</MenuItem>
-                </Select>
-              </FormControl>
-            </InfoSectionContainer>
-
-            <InfoSectionContainer>
-              <Typography variant="subtitle1">Info</Typography>
-              <FormControl fullWidth variant="outlined" size="small">
-                <Select value={info4} onChange={handleInfoChange(setInfo4)} displayEmpty>
-                  <MenuItem value=""><em>Choose an option</em></MenuItem>
-                  <MenuItem value="1">Option 1</MenuItem>
-                  <MenuItem value="2">Option 2</MenuItem>
-                </Select>
-              </FormControl>
-            </InfoSectionContainer>
-          </OverlayPanel>
+            </OverlayPanel>
+          </Box>
 
           <CopyrightBar>
             <Typography>Lorem ipsum dolor sit amet, consectetur adipiscing elit rem ipsum</Typography>
@@ -347,13 +341,7 @@ function App() {
       <OverlayPanel className="left-panel" elevation={3}>
         <LogoContainer>
           <Logo>
-            <svg className="logo-icon" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="20" cy="20" r="18" fill="#e30613"/>
-              <path d="M20 10 L30 20 L20 30 L10 20 Z" fill="#e30613" stroke="white" strokeWidth="2"/>
-              <circle cx="20" cy="20" r="5" fill="white"/>
-              <path d="M30 10 L35 15" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-            <span className="logo-text">Logoipsum</span>
+            <img src="/images/schott-logo.png" alt="Schott Performance Wheels" className="logo-img" />
           </Logo>
         </LogoContainer>
 

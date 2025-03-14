@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 120">
+  <!-- Red curved line -->
+  <path d="M20,30 C50,0 250,0 280,30" fill="#e30613" stroke="none" stroke-width="2"/>
+  
+  <!-- SCHOTT text -->
+  <g transform="translate(60, 65)">
+    <path d="M17,0 C10,0 5,3 5,9 C5,19 21,16 21,21 C21,23 18,24 15,24 C10,24 8,21 8,18 L0,18 C0,26 6,31 15,31 C23,31 29,27 29,21 C29,11 13,14 13,9 C13,7 15,6 17,6 C21,6 22,9 22,11 L30,11 C30,5 25,0 17,0" fill="black"/>
+    <path d="M40,7 C40,3 43,1 47,1 C51,1 54,3 54,7 L54,8 L62,8 L62,7 C62,0 55,-6 47,-6 C39,-6 32,0 32,7 L32,18 C32,25 39,31 47,31 C55,31 62,25 62,18 L62,16 L54,16 L54,18 C54,22 51,24 47,24 C43,24 40,22 40,18 L40,7" fill="black"/>
+    <path d="M73,0 L65,0 L65,30 L88,30 L88,23 L73,23 L73,0" fill="black"/>
+    <path d="M99,0 L91,0 L91,30 L114,30 L114,23 L99,23 L99,18 L111,18 L111,11 L99,11 L99,7 L114,7 L114,0 L99,0" fill="black"/>
+    <path d="M125,0 L125,30 L133,30 L133,19 L146,30 L158,30 L141,16 L157,0 L145,0 L133,12 L133,0 L125,0" fill="black"/>
+    <path d="M168,0 L168,30 L176,30 L176,19 L179,19 L187,30 L197,30 L186,17 L196,0 L186,0 L179,11 L176,11 L176,0 L168,0" fill="black"/>
+  </g>
+  
+  <!-- PERFORMANCE WHEELS text -->
+  <g transform="translate(100, 95)">
+    <text font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="black">PERFORMANCE WHEELS</text>
+  </g>
+</svg> 
