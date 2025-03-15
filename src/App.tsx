@@ -212,7 +212,7 @@ const SliderTrackBackground = styled('div')<SliderTrackBackgroundProps>(({ width
   position: 'absolute',
   height: '35px',
   width: `${width}%`,
-  backgroundColor: color,
+  backgroundColor: 'transparent', // Fully transparent to let the image show through
   top: '45%',
   transform: 'translateY(-50%)',
   left: 0,
@@ -225,7 +225,10 @@ const SliderWhiteBackground = styled('div')({
   position: 'absolute',
   height: '35px',
   width: '100%',
-  backgroundColor: 'white',
+  backgroundImage: 'url("/slider-background.jpg")',
+  backgroundSize: '100% auto', // Set width to 100%, height scales automatically to maintain aspect ratio
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat', // Prevent background from repeating
   top: '45%',
   transform: 'translateY(-50%)',
   left: 0,
@@ -363,13 +366,18 @@ function App() {
     return ((value - min) / (max - min)) * 100;
   };
 
-  // Get the background color based on slider value
+  // Get the background color based on slider value - commented out as requested
+  /* 
   const getSliderBackgroundColor = (value: number) => {
     if (value >= 1 && value <= 3) return '#ff0000'; // Red for 1-3
     if (value >= 4 && value <= 7) return '#00aa00'; // Green for 4-7
     if (value >= 8 && value <= 10) return '#ff0000'; // Red again for 8-10
     return '#000000'; // Default fallback
   };
+  */
+  
+  // Replaced with a version that always returns transparent
+  const getSliderBackgroundColor = (value: number) => 'transparent';
 
   // Handle form changes
   const handleInfoChange = (setter: React.Dispatch<React.SetStateAction<string>>) => (event: SelectChangeEvent) => {
