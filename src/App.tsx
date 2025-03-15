@@ -76,7 +76,10 @@ const OverlayPanel = styled(Paper)(({ theme }: any) => ({
     borderRadius: 0,
     '&.left-panel': {
       order: 0,
-      padding: 0
+      padding: 0,
+      maxHeight: '300px',  // Set a fixed height for scrollability
+      overflowY: 'auto',   // Enable vertical scrolling
+      overflowX: 'hidden'  // Prevent horizontal scrolling
     },
     '&.right-panel': {
       order: 2,
@@ -85,13 +88,12 @@ const OverlayPanel = styled(Paper)(({ theme }: any) => ({
   }
 }));
 
-const SliderContainer = styled(Box)(({ theme }: any) => ({
-  background: 'rgba(0, 0, 0, 0.7)',
-  borderRadius: 0,
-  padding: theme.spacing(2),
-  marginTop: theme.spacing(2),
-  color: '#ffffff',
-}));
+// Slider container to properly position track background and slider together
+const SliderContainer = styled(Box)({
+  position: 'relative',
+  padding: '15px 0',
+  marginBottom: '5px'
+});
 
 // Left panel specific styling components
 const InfoSectionContainer = styled(Box)(({ theme }: any) => ({
@@ -167,7 +169,68 @@ const SliderSection = styled(Box)(({ theme }: any) => ({
   padding: theme.spacing(2),
   marginTop: theme.spacing(1.5),
   marginBottom: theme.spacing(1.5),
+  position: 'relative'
 }));
+
+// Custom styled slider that changes color based on value
+const ColorTrackSlider = styled(Slider)(({ theme }: any) => {
+  return {
+    height: 6,
+    padding: '12px 0',
+    position: 'relative',
+    '& .MuiSlider-thumb': {
+      width: 20,
+      height: 20,
+      backgroundColor: '#fff',
+      border: '2px solid #000',
+      '&:focus, &:hover, &.Mui-active': {
+        boxShadow: '0 0 0 8px rgba(0, 0, 0, 0.1)',
+      }
+    },
+    '& .MuiSlider-track': {
+      backgroundColor: '#000', // Keep the track black
+      height: 6,
+      border: 'none',
+    },
+    '& .MuiSlider-rail': {
+      backgroundColor: '#000', // Keep the rail black
+      height: 6,
+      opacity: 0.7,
+    }
+  };
+});
+
+// Define interface for the custom slider track background props
+interface SliderTrackBackgroundProps {
+  width: number;
+  color: string;
+}
+
+// Custom slider track background component - colored rectangle BEHIND the slider up to the thumb
+const SliderTrackBackground = styled('div')<SliderTrackBackgroundProps>(({ width, color }: SliderTrackBackgroundProps) => ({
+  position: 'absolute',
+  height: '35px',
+  width: `${width}%`,
+  backgroundColor: color,
+  top: '45%',
+  transform: 'translateY(-50%)',
+  left: 0,
+  zIndex: 1,
+  borderRadius: '0px'
+}));
+
+// Full width white background behind the entire slider
+const SliderWhiteBackground = styled('div')({
+  position: 'absolute',
+  height: '35px',
+  width: '100%',
+  backgroundColor: 'white',
+  top: '45%',
+  transform: 'translateY(-50%)',
+  left: 0,
+  zIndex: 0,
+  borderRadius: '0px'
+});
 
 // New container for the main layout
 const ContentContainer = styled(Box)(({ theme }: any) => ({
@@ -275,6 +338,19 @@ function App() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
+  // Calculate the width percentage for the colored background
+  const calculateWidthPercentage = (value: number, min: number, max: number) => {
+    return ((value - min) / (max - min)) * 100;
+  };
+
+  // Get the background color based on slider value
+  const getSliderBackgroundColor = (value: number) => {
+    if (value >= 1 && value <= 3) return '#ff0000'; // Red for 1-3
+    if (value >= 4 && value <= 7) return '#00aa00'; // Green for 4-7
+    if (value >= 8 && value <= 10) return '#ff0000'; // Red again for 8-10
+    return '#000000'; // Default fallback
+  };
+
   // Handle form changes
   const handleInfoChange = (setter: React.Dispatch<React.SetStateAction<string>>) => (event: SelectChangeEvent) => {
     setter(event.target.value as string);
@@ -349,6 +425,51 @@ function App() {
                 </Select>
               </FormControl>
             </InfoSectionContainer>
+            
+            {/* Adding the additional 4 dropdowns that were missing in mobile view */}
+            <InfoSectionContainer>
+              <Typography variant="subtitle1">Info</Typography>
+              <FormControl fullWidth variant="outlined" size="small">
+                <Select value={info5} onChange={handleInfoChange(setInfo5)} displayEmpty>
+                  <MenuItem value=""><em>Choose an option</em></MenuItem>
+                  <MenuItem value="1">Option 1</MenuItem>
+                  <MenuItem value="2">Option 2</MenuItem>
+                </Select>
+              </FormControl>
+            </InfoSectionContainer>
+
+            <InfoSectionContainer>
+              <Typography variant="subtitle1">Info</Typography>
+              <FormControl fullWidth variant="outlined" size="small">
+                <Select value={info6} onChange={handleInfoChange(setInfo6)} displayEmpty>
+                  <MenuItem value=""><em>Choose an option</em></MenuItem>
+                  <MenuItem value="1">Option 1</MenuItem>
+                  <MenuItem value="2">Option 2</MenuItem>
+                </Select>
+              </FormControl>
+            </InfoSectionContainer>
+
+            <InfoSectionContainer>
+              <Typography variant="subtitle1">Info</Typography>
+              <FormControl fullWidth variant="outlined" size="small">
+                <Select value={info7} onChange={handleInfoChange(setInfo7)} displayEmpty>
+                  <MenuItem value=""><em>Choose an option</em></MenuItem>
+                  <MenuItem value="1">Option 1</MenuItem>
+                  <MenuItem value="2">Option 2</MenuItem>
+                </Select>
+              </FormControl>
+            </InfoSectionContainer>
+
+            <InfoSectionContainer>
+              <Typography variant="subtitle1">Info</Typography>
+              <FormControl fullWidth variant="outlined" size="small">
+                <Select value={info8} onChange={handleInfoChange(setInfo8)} displayEmpty>
+                  <MenuItem value=""><em>Choose an option</em></MenuItem>
+                  <MenuItem value="1">Option 1</MenuItem>
+                  <MenuItem value="2">Option 2</MenuItem>
+                </Select>
+              </FormControl>
+            </InfoSectionContainer>
           </OverlayPanel>
 
           {/* Responsive Iframe Container for Mobile */}
@@ -382,37 +503,20 @@ function App() {
               <Typography variant="h3" sx={{ textAlign: 'center', fontWeight: 'bold', fontSize: '36px' }}>
                 {sliderValue}
               </Typography>
-              <Slider
-                value={sliderValue}
-                onChange={handleSliderChange}
-                min={1}
-                max={10}
-                step={1}
-                sx={{
-                  color: '#ff0000',
-                  height: 8,
-                  padding: '10px 0',
-                  '& .MuiSlider-thumb': {
-                    width: 20,
-                    height: 20,
-                    backgroundColor: '#fff',
-                    border: '2px solid #000',
-                    '&:focus, &:hover, &.Mui-active': {
-                      boxShadow: '0 0 0 8px rgba(0, 0, 0, 0.1)',
-                    }
-                  },
-                  '& .MuiSlider-track': {
-                    backgroundColor: '#ff0000',
-                    height: 8,
-                    border: 'none',
-                  },
-                  '& .MuiSlider-rail': {
-                    backgroundColor: '#000',
-                    height: 8,
-                    opacity: 1,
-                  }
-                }}
-              />
+              <SliderContainer>
+                <SliderWhiteBackground />
+                <SliderTrackBackground
+                  width={calculateWidthPercentage(sliderValue, 1, 10)}
+                  color={getSliderBackgroundColor(sliderValue)}
+                />
+                <ColorTrackSlider
+                  value={sliderValue}
+                  onChange={handleSliderChange}
+                  min={1}
+                  max={10}
+                  step={1}
+                />
+              </SliderContainer>
               <Box sx={{ 
                 display: 'flex', 
                 justifyContent: 'space-between', 
@@ -577,37 +681,20 @@ function App() {
             <Typography variant="h3" sx={{ textAlign: 'center', fontWeight: 'bold', fontSize: '36px' }}>
               {sliderValue}
             </Typography>
-            <Slider
-              value={sliderValue}
-              onChange={handleSliderChange}
-              min={1}
-              max={10}
-              step={1}
-              sx={{
-                color: '#ff0000',
-                height: 8,
-                padding: '10px 0',
-                '& .MuiSlider-thumb': {
-                  width: 20,
-                  height: 20,
-                  backgroundColor: '#fff',
-                  border: '2px solid #000',
-                  '&:focus, &:hover, &.Mui-active': {
-                    boxShadow: '0 0 0 8px rgba(0, 0, 0, 0.1)',
-                  }
-                },
-                '& .MuiSlider-track': {
-                  backgroundColor: '#ff0000',
-                  height: 8,
-                  border: 'none',
-                },
-                '& .MuiSlider-rail': {
-                  backgroundColor: '#000',
-                  height: 8,
-                  opacity: 1,
-                }
-              }}
-            />
+            <SliderContainer>
+              <SliderWhiteBackground />
+              <SliderTrackBackground
+                width={calculateWidthPercentage(sliderValue, 1, 10)}
+                color={getSliderBackgroundColor(sliderValue)}
+              />
+              <ColorTrackSlider
+                value={sliderValue}
+                onChange={handleSliderChange}
+                min={1}
+                max={10}
+                step={1}
+              />
+            </SliderContainer>
             <Box sx={{ 
               display: 'flex', 
               justifyContent: 'space-between', 

@@ -53,14 +53,23 @@ html, body {
 
 .right-panel .MuiSlider-root {
   margin: 0;
+  position: relative;
+  z-index: 2;
 }
 
+/* Style for slider container to ensure backgrounds are visible */
+.right-panel .MuiSlider-track,
 .right-panel .MuiSlider-rail {
-  background-color: #000 !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  z-index: 2;
+  height: 6px !important;
+  width: 98% !important;
+  margin: 0 auto !important;
 }
 
-.right-panel .MuiSlider-track {
-  background-color: #ff0000 !important;
+/* Ensure the slider thumb is above everything */
+.right-panel .MuiSlider-thumb {
+  z-index: 3 !important;
 }
 
 /* Ensure panels remain visible and properly positioned */
@@ -69,10 +78,36 @@ html, body {
   overflow-y: auto;
 }
 
+/* Custom scrollbar styling for better UX */
 .left-panel::-webkit-scrollbar,
 .right-panel::-webkit-scrollbar {
-  width: 0;
+  width: 5px;
   background: transparent;
+}
+
+.left-panel::-webkit-scrollbar-thumb,
+.right-panel::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.left-panel::-webkit-scrollbar-thumb:hover,
+.right-panel::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Mobile styles for the scrollable left panel */
+@media (max-width: 600px) {
+  .left-panel {
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    scrollbar-width: thin; /* Firefox */
+    position: relative;
+  }
+  
+  /* Prevent scroll chaining/propagation to the main page */
+  .left-panel {
+    overscroll-behavior: contain;
+  }
 }
 
 /* Mobile responsiveness */
