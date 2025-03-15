@@ -98,24 +98,42 @@ html, body {
 
 /* Mobile styles for the scrollable left panel */
 @media (max-width: 600px) {
+  body {
+    position: relative;
+    min-height: 100vh;
+  }
+
   .left-panel {
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     scrollbar-width: thin; /* Firefox */
     position: relative;
+    touch-action: pan-y; /* Enable vertical touch scrolling */
   }
   
   /* Prevent scroll chaining/propagation to the main page */
   .left-panel {
-    overscroll-behavior: contain;
+    overscroll-behavior: auto; /* Changed from 'contain' to 'auto' to allow scroll propagation */
+    max-height: 300px; /* Ensure consistent height */
+  }
+  
+  /* Fix to allow scrolling past the panel */
+  .left-panel::after {
+    content: '';
+    display: block;
+    height: 1px; /* Small height to prevent scroll lock */
+    visibility: hidden;
   }
 }
 
 /* Mobile responsiveness */
 @media (max-width: 600px) {
   html, body {
-    overflow: auto;
+    overflow-y: auto; /* Explicitly enable vertical scrolling */
+    overflow-x: hidden;
     width: 100vw;
     max-width: 100%;
+    height: auto; /* Changed from 100% to auto to enable full page scrolling */
+    -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
   }
   
   #root {
@@ -123,12 +141,32 @@ html, body {
     min-height: 100%;
     width: 100vw;
     max-width: 100%;
+    overflow-y: visible; /* Ensure content is scrollable */
+    position: static; /* Prevent positioning issues */
   }
   
   .left-panel, .right-panel {
-    max-height: none;
     margin-bottom: 15px;
     width: 100vw !important;
     max-width: 100% !important;
+  }
+  
+  /* Only the left panel has fixed height and scrolls internally */
+  .left-panel {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  /* Right panel expands to content */
+  .right-panel {
+    max-height: none;
+    overflow-y: visible;
+  }
+  
+  /* Mobile container wrapper  */
+  .MobileContainer {
+    overflow-y: visible !important;
+    min-height: 100vh;
+    position: relative;
   }
 }

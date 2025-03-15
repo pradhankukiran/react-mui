@@ -72,7 +72,6 @@ const OverlayPanel = styled(Paper)(({ theme }: any) => ({
     width: '100%',
     position: 'relative',
     margin: '0',
-    maxHeight: 'none',
     borderRadius: 0,
     '&.left-panel': {
       order: 0,
@@ -83,7 +82,9 @@ const OverlayPanel = styled(Paper)(({ theme }: any) => ({
     },
     '&.right-panel': {
       order: 2,
-      marginBottom: 0
+      marginBottom: 0,
+      maxHeight: 'none',
+      overflowY: 'visible'
     }
   }
 }));
@@ -148,7 +149,7 @@ const MobileContainer = styled(Box)(({ theme }: any) => ({
   minHeight: '100vh',
   padding: '0',
   margin: '0',
-  overflow: 'hidden',
+  overflow: 'visible', // Changed from 'hidden' to 'visible' to allow scrolling
   position: 'relative'
 }));
 
@@ -338,6 +339,25 @@ function App() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
+  // Handle scrolling in mobile view
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    const target = e.currentTarget;
+    const scrollTop = target.scrollTop;
+    const scrollHeight = target.scrollHeight;
+    const height = target.clientHeight;
+    const delta = e.touches[0].clientY;
+    
+    // Store touch position for future reference
+    target.dataset.touchStartY = delta.toString();
+    target.dataset.scrollTop = scrollTop.toString();
+    
+    // Determine if we should prevent propagation
+    if ((scrollTop <= 0 && delta > 0) || (scrollTop + height >= scrollHeight && delta < 0)) {
+      // At the boundary, allow parent scroll
+      e.stopPropagation();
+    }
+  };
+
   // Calculate the width percentage for the colored background
   const calculateWidthPercentage = (value: number, min: number, max: number) => {
     return ((value - min) / (max - min)) * 100;
@@ -368,7 +388,7 @@ function App() {
   if (isMobile) {
     return (
       <>
-        <MobileContainer>
+        <MobileContainer className="MobileContainer">
           {/* Top Logo Bar (Mobile) */}
           <LogoContainer sx={{ width: '100vw', maxWidth: '100%', justifyContent: 'center', marginBottom: 0 }}>
             <Logo>
@@ -381,7 +401,11 @@ function App() {
           </TitleBar>
 
           {/* Left Panel (Mobile) */}
-          <OverlayPanel className="left-panel" elevation={3}>
+          <OverlayPanel 
+            className="left-panel" 
+            elevation={3} 
+            onTouchStart={handleTouchStart}
+          >
             <InfoSectionContainer>
               <Typography variant="subtitle1">Info</Typography>
               <FormControl fullWidth variant="outlined" size="small">
