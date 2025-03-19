@@ -1,0 +1,43 @@
+{
+  "appTitle": "3D Model Viewer",
+  "controls": {
+    "model": {
+      "label": "Model",
+      "options": [
+        { "value": "model1", "label": "Model 1" },
+        { "value": "model2", "label": "Model 2" },
+        { "value": "model3", "label": "Model 3" }
+      ]
+    },
+    "material": {
+      "label": "Material",
+      "options": [
+        { "value": "material1", "label": "Material 1" },
+        { "value": "material2", "label": "Material 2" },
+        { "value": "material3", "label": "Material 3" }
+      ]
+    },
+    "lighting": {
+      "label": "Lighting",
+      "options": [
+        { "value": "lighting1", "label": "Lighting 1" },
+        { "value": "lighting2", "label": "Lighting 2" },
+        { "value": "lighting3", "label": "Lighting 3" }
+      ]
+    }
+  },
+  "sliders": {
+    "rotation": {
+      "label": "Rotation",
+      "min": 0,
+      "max": 360,
+      "default": 0
+    },
+    "scale": {
+      "label": "Scale",
+      "min": 0.5,
+      "max": 2,
+      "default": 1
+    }
+  }
+} 

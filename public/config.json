@@ -1,0 +1,116 @@
+{
+  "appTitle": "Fuel",
+  "leftPanel": {
+    "dropdowns": [
+      {
+        "id": "faceA",
+        "label": "Face A",
+        "options": [
+          { "value": "red", "label": "Red" },
+          { "value": "green", "label": "Green" },
+          { "value": "blue", "label": "Blue" },
+          { "value": "cobalt", "label": "Cobalt" },
+          { "value": "bronze", "label": "Bronze" },
+          { "value": "cyberGray", "label": "Cyber Gray" },
+          { "value": "tungsten", "label": "Tungsten" }
+        ]
+      },
+      {
+        "id": "faceB",
+        "label": "Face B",
+        "options": [
+          { "value": "red", "label": "Red" },
+          { "value": "green", "label": "Green" },
+          { "value": "blue", "label": "Blue" },
+          { "value": "cobalt", "label": "Cobalt" },
+          { "value": "bronze", "label": "Bronze" },
+          { "value": "cyberGray", "label": "Cyber Gray" },
+          { "value": "tungsten", "label": "Tungsten" }
+        ]
+      },
+      {
+        "id": "windows",
+        "label": "Windows",
+        "options": [
+          { "value": "red", "label": "Red" },
+          { "value": "green", "label": "Green" },
+          { "value": "blue", "label": "Blue" },
+          { "value": "cobalt", "label": "Cobalt" },
+          { "value": "bronze", "label": "Bronze" },
+          { "value": "cyberGray", "label": "Cyber Gray" },
+          { "value": "tungsten", "label": "Tungsten" }
+        ]
+      },
+      {
+        "id": "rimLip",
+        "label": "Rim Lip",
+        "options": [
+          { "value": "red", "label": "Red" },
+          { "value": "green", "label": "Green" },
+          { "value": "blue", "label": "Blue" },
+          { "value": "cobalt", "label": "Cobalt" },
+          { "value": "bronze", "label": "Bronze" },
+          { "value": "cyberGray", "label": "Cyber Gray" },
+          { "value": "tungsten", "label": "Tungsten" }
+        ]
+      },
+      {
+        "id": "centerCap",
+        "label": "Center Cap",
+        "options": [
+          { "value": "red", "label": "Red" },
+          { "value": "green", "label": "Green" },
+          { "value": "blue", "label": "Blue" },
+          { "value": "cobalt", "label": "Cobalt" },
+          { "value": "bronze", "label": "Bronze" },
+          { "value": "cyberGray", "label": "Cyber Gray" },
+          { "value": "tungsten", "label": "Tungsten" }
+        ]
+      },
+      {
+        "id": "accessory",
+        "label": "Accessory",
+        "options": [
+          { "value": "red", "label": "Red" },
+          { "value": "green", "label": "Green" },
+          { "value": "blue", "label": "Blue" },
+          { "value": "cobalt", "label": "Cobalt" },
+          { "value": "bronze", "label": "Bronze" },
+          { "value": "cyberGray", "label": "Cyber Gray" },
+          { "value": "tungsten", "label": "Tungsten" }
+        ]
+      }
+    ]
+  },
+  "rightPanel": {
+    "dropdowns": [
+      {
+        "id": "model",
+        "label": "Model",
+        "options": [
+          { "value": "model1", "label": "Model 1" },
+          { "value": "model2", "label": "Model 2" },
+          { "value": "model3", "label": "Model 3" }
+        ]
+      }
+    ],
+    "rotationSlider": {
+      "label": "Rotation",
+      "min": 1,
+      "max": 10,
+      "default": 5,
+      "backgroundImages": {
+        "1": "/images/slider-backgrounds/slider-bg-1.jpg",
+        "2": "/images/slider-backgrounds/slider-bg-2.jpg",
+        "3": "/images/slider-backgrounds/slider-bg-3.jpg",
+        "4": "/images/slider-backgrounds/slider-bg-4.jpg",
+        "5": "/images/slider-backgrounds/slider-bg-5.jpg",
+        "6": "/images/slider-backgrounds/slider-bg-6.jpg",
+        "7": "/images/slider-backgrounds/slider-bg-7.jpg",
+        "8": "/images/slider-backgrounds/slider-bg-8.jpg",
+        "9": "/images/slider-backgrounds/slider-bg-9.jpg",
+        "10": "/images/slider-backgrounds/slider-bg-10.jpg"
+      }
+    }
+  }
+} 
